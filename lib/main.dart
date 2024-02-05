@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'appointment_card.dart';
 
 void main() => runApp(MaterialApp(
       home: Dashboard(),
@@ -6,6 +7,7 @@ void main() => runApp(MaterialApp(
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
+  static int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -80,599 +82,306 @@ class Dashboard extends StatelessWidget {
             ],
           ),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30.0, 20, 20, 0),
-              child: ClipRRect(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search Patients',
-                    suffixIcon: Icon(
-                      Icons.search,
-                      color: Colors.teal[600],
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30.0, 20, 20, 0),
+                child: ClipRRect(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search Patients',
+                      suffixIcon: Icon(
+                        Icons.search,
+                        color: Colors.teal[600],
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(25.0, 20, 20, 0),
-              child: Card(
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 10),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Today\'s Appointment',
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 42.0, // Add the desired width for separation
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.teal), // Set the background color
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      8.0), // Adjust the border radius
+             
+              AppointmentCard(),
+
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/patient.png',
+                              width: 40.0,
+                              height: 40.0,
+                              fit: BoxFit.cover,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                '345',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
                                 ),
                               ),
                             ),
-                            child: Text(
-                              'Set Reminder',
+                            Text(
+                              'Patients',
                               style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
+                                color: Colors.blue,
                                 fontWeight: FontWeight.bold,
                               ),
-                            ),
-                          ),
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10.0, 20, 10, 0),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.blue, // Set the border color
-                                width: 1.0, // Set the border width
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/prescription.png',
+                              width: 40.0,
+                              height: 40.0,
+                              fit: BoxFit.cover,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Modupe West',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14),
-                                            ),
-                                            WidgetSpan(
-                                                child: SizedBox(width: 4)),
-                                            WidgetSpan(
-                                              child: Transform.translate(
-                                                offset: const Offset(0.0,
-                                                    -6.0), // Adjust the offset to position the superscript
-                                                child: Text(
-                                                  'New',
-                                                  style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize:
-                                                          10), // Adjust the font size
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Text(
-                                        '10am - 11am',
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.teal),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(width: 120.0),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      side: const BorderSide(
-                                          width: 1, color: Colors.teal),
-                                      padding:
-                                          const EdgeInsets.fromLTRB(6, 0, 6, 0),
-                                      foregroundColor: Colors.teal,
-                                      textStyle: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    child: const Text('Patient details'),
-                                    onPressed: () {},
-                                  ),
-                                ],
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                '23',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                            Text(
+                              'Prescriptions',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10.0, 20, 10, 0),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.blue, // Set the border color
-                                width: 1.0, // Set the border width
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/alarm2.png',
+                              width: 40.0,
+                              height: 40.0,
+                              fit: BoxFit.cover,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Modupe West',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14),
-                                            ),
-                                            WidgetSpan(
-                                                child: SizedBox(width: 4)),
-                                            WidgetSpan(
-                                              child: Transform.translate(
-                                                offset: const Offset(0.0,
-                                                    -6.0), // Adjust the offset to position the superscript
-                                                child: Text(
-                                                  'New',
-                                                  style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize:
-                                                          10), // Adjust the font size
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Text(
-                                        '10am - 11am',
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.teal),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(width: 120.0),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      side: const BorderSide(
-                                          width: 1, color: Colors.teal),
-                                      padding:
-                                          const EdgeInsets.fromLTRB(6, 0, 6, 0),
-                                      foregroundColor: Colors.teal,
-                                      textStyle: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    child: const Text('Patient details'),
-                                    onPressed: () {},
-                                  ),
-                                ],
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                '120 mins',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                            Text(
+                              '2 hrs',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10.0, 20, 10, 0),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.blue, // Set the border color
-                                width: 1.0, // Set the border width
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Modupe West',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14),
-                                            ),
-                                            WidgetSpan(
-                                                child: SizedBox(width: 4)),
-                                            WidgetSpan(
-                                              child: Transform.translate(
-                                                offset: const Offset(0.0,
-                                                    -6.0), // Adjust the offset to position the superscript
-                                                child: Text(
-                                                  'New',
-                                                  style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize:
-                                                          10), // Adjust the font size
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Text(
-                                        '10am - 11am',
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.teal),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(width: 120.0),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      side: const BorderSide(
-                                          width: 1, color: Colors.teal),
-                                      padding:
-                                          const EdgeInsets.fromLTRB(6, 0, 6, 0),
-                                      foregroundColor: Colors.teal,
-                                      textStyle: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    child: const Text('Patient details'),
-                                    onPressed: () {},
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10.0, 20, 10, 10),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.blue, // Set the border color
-                                width: 1.0, // Set the border width
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Modupe West',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14),
-                                            ),
-                                            WidgetSpan(
-                                                child: SizedBox(width: 4)),
-                                            WidgetSpan(
-                                              child: Transform.translate(
-                                                offset: const Offset(0.0,
-                                                    -6.0), // Adjust the offset to position the superscript
-                                                child: Text(
-                                                  'New',
-                                                  style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize:
-                                                          10), // Adjust the font size
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Text(
-                                        '10am - 11am',
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.teal),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(width: 120.0),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      side: const BorderSide(
-                                          width: 1, color: Colors.teal),
-                                      padding:
-                                          const EdgeInsets.fromLTRB(6, 0, 6, 0),
-                                      foregroundColor: Colors.teal,
-                                      textStyle: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    child: const Text('Patient details'),
-                                    onPressed: () {},
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/patient.png', 
-                            width: 50.0, 
-                            height: 50.0, 
-                            fit: BoxFit
-                                .cover, 
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Text(
-                              '345',
-                              style: TextStyle(
-                                fontWeight:
-                                    FontWeight.bold, 
-                                color: Colors.blue, 
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/note.png',
+                              width: 40.0,
+                              height: 40.0,
+                              fit: BoxFit.cover,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                '5',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                ),
                               ),
                             ),
-                          ),
-                          Text(
-                            'Patients',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight:
-                                  FontWeight.bold, 
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/prescription.png', 
-                            width: 50.0, 
-                            height: 50.0, 
-                            fit: BoxFit
-                                .cover,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Text(
-                              '23',
+                            Text(
+                              'Consultations',
                               style: TextStyle(
-                                fontWeight:
-                                    FontWeight.bold, 
-                                color: Colors.blue, 
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/med_note.png',
+                              width: 40.0,
+                              height: 40.0,
+                              fit: BoxFit.cover,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                '4 Notes',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                ),
                               ),
                             ),
-                          ),
-                          Text(
-                            'Prescriptions',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight:
-                                  FontWeight.bold,
-                            ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/alarm2.png', 
-                            width: 50.0, 
-                            height: 50.0, 
-                            fit: BoxFit
-                                .cover, 
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Text(
-                              '120 mins',
-                              style: TextStyle(
-                                fontWeight:
-                                    FontWeight.bold, 
-                                color: Colors.blue, 
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/dollar.png',
+                              width: 40.0,
+                              height: 40.0,
+                              fit: BoxFit.cover,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                '# 100,000',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                ),
                               ),
                             ),
-                          ),
-                          Text(
-                            '2 hrs',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight:
-                                  FontWeight.bold, 
-                            ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
+              SizedBox(height: 20),
+              Divider(
+                height: 2.0,
+                color: Colors.blue,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  child:const Row(
+                    children: <Widget>[
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Icon(Icons.dashboard, color:Colors.teal),
+                              SizedBox(height:5), 
+                              Text(
+                                'Dashboard',
+                                style: TextStyle(
+                                    fontSize:12, color:Colors.teal), 
+                              ), 
+                            ],
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Icon(Icons.schedule, color:Colors.blue),
+                              SizedBox(
+                                  height:5), 
+                              Text(
+                                'Schedule',
+                                style: TextStyle(
+                                    fontSize:12, color:Colors.blue), 
+                              ),
+                              
+                            ],
+                          )),
+                           Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Icon(Icons.people, color:Colors.blue),
+                              SizedBox(
+                                  height:5), 
+                              Text(
+                                'People',
+                                style: TextStyle(
+                                    fontSize:12, color:Colors.blue),
+                              ),
+                            ],
+                          )),
+                           Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Icon(Icons.person, color:Colors.blue),
+                              SizedBox(
+                                  height:5),
+                              Text(
+                                'Profile',
+                                style: TextStyle(
+                                    fontSize:12, color:Colors.blue),
+                              ),
+                              
+                            ],
+                          )),
+                           Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Icon(Icons.settings, color:Colors.blue),
+                              SizedBox(
+                                  height:5), 
+                              Text(
+                                'Settings',
+                                style: TextStyle(
+                                    fontSize:12, color:Colors.blue),
+                              ),
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+              ),
 
-             Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/note.png', 
-                            width: 50.0, 
-                            height: 50.0, 
-                            fit: BoxFit
-                                .cover, 
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Text(
-                              '5',
-                              style: TextStyle(
-                                fontWeight:
-                                    FontWeight.bold, 
-                                color: Colors.blue, 
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Consultations',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight:
-                                  FontWeight.bold, 
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/med_note.png', 
-                            width: 50.0, 
-                            height: 50.0, 
-                            fit: BoxFit
-                                .cover,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Text(
-                              '4 Notes',
-                              style: TextStyle(
-                                fontWeight:
-                                    FontWeight.bold, 
-                                color: Colors.blue, 
-                              ),
-                            ),
-                          ),
-                        
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/dollar.png', 
-                            width: 50.0, 
-                            height: 50.0, 
-                            fit: BoxFit
-                                .cover, 
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Text(
-                              '# 100,000',
-                              style: TextStyle(
-                                fontWeight:
-                                    FontWeight.bold, 
-                                color: Colors.blue, 
-                              ),
-                            ),
-                          ),
-                         
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+  
+
+
